@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esquenta GTA VI</title>
+<meta name="description" content="Contagem regressiva e bolão de palpites da galera pro GTA VI.">
+<meta property="og:title" content="Esquenta GTA VI 🌴">
+<meta property="og:description" content="Deixa teu palpite do que vai rolar no jogo antes da meia-noite. Depois a gente confere quem acertou.">
+<meta name="theme-color" content="#1a0b2e">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Yellowtail&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#12081f; --night2:#1d0d33; --violet:#5b2a86; --pink:#ff2e88; --hot:#ff4f6d;
+  --orange:#ff9a3d; --sun:#ffd166; --cyan:#33e1ff; --mint:#3dffb0;
+  --ink:#fff4fb; --muted:#c9b3d9; --card:rgba(255,255,255,.06); --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Space Grotesk",system-ui,sans-serif;background:var(--night);color:var(--ink);min-height:100vh;overflow-x:hidden}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--cyan)}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px 160px;text-align:center;overflow:hidden;
+  background:linear-gradient(180deg,#0e0620 0%,#2a0f4a 35%,#7a1f6b 62%,#ff4f6d 82%,#ff9a3d 100%)}
+.stars{position:absolute;inset:0 0 45% 0;background-image:radial-gradient(1px 1px at 10% 20%,#fff8,transparent),radial-gradient(1px 1px at 30% 8%,#fff9,transparent),radial-gradient(1.5px 1.5px at 55% 25%,#fffa,transparent),radial-gradient(1px 1px at 70% 12%,#fff7,transparent),radial-gradient(1px 1px at 85% 30%,#fff9,transparent),radial-gradient(1px 1px at 20% 40%,#fff6,transparent),radial-gradient(1.5px 1.5px at 92% 6%,#fff,transparent),radial-gradient(1px 1px at 45% 5%,#fff8,transparent);animation:twinkle 6s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.5}}
+.scene{position:absolute;left:0;right:0;bottom:0;height:46%;pointer-events:none}
+.scene svg{width:100%;height:100%;display:block}
+.grid-floor{position:absolute;left:-50%;right:-50%;bottom:0;height:22%;background:
+  linear-gradient(transparent 0 92%,rgba(255,46,136,.55) 92%) 0 0/100% 22px,
+  linear-gradient(90deg,transparent 0 96%,rgba(255,46,136,.45) 96%) 0 0/48px 100%;
+  transform:perspective(260px) rotateX(62deg);transform-origin:bottom;animation:floor 1.6s linear infinite;opacity:.55}
+@keyframes floor{to{background-position:0 22px,0 0}}
+.hero-inner{position:relative;z-index:2;max-width:980px;width:100%}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:13px;letter-spacing:.25em;text-transform:uppercase;color:var(--sun);background:rgba(0,0,0,.25);border:1px solid rgba(255,209,102,.35);padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.wordmark{margin:26px 0 6px;line-height:.85}
+.wordmark .script{display:block;font-family:Yellowtail,cursive;font-size:clamp(56px,11vw,120px);color:#fff;
+  text-shadow:0 0 6px #fff,0 0 18px var(--pink),0 0 40px var(--pink),0 0 70px var(--hot);transform:rotate(-6deg);margin-bottom:-6px}
+.wordmark .block{display:block;font-family:Anton,Impact,sans-serif;font-size:clamp(72px,17vw,190px);letter-spacing:.02em;
+  background:linear-gradient(180deg,#fff 0%,#ffe7f3 38%,#ffb3d1 50%,#ff2e88 51%,#ff9a3d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 0 #3b0f4f) drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.sub{font-size:clamp(15px,2.2vw,19px);color:#ffe3f0;max-width:620px;margin:14px auto 0;opacity:.92}
+
+.countdown{display:flex;justify-content:center;gap:clamp(8px,2vw,18px);margin:38px auto 10px;flex-wrap:wrap}
+.unit{min-width:clamp(74px,16vw,132px);padding:16px 10px 12px;border-radius:18px;background:rgba(18,8,31,.55);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);box-shadow:0 10px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+.num{font-family:Anton,Impact,sans-serif;font-size:clamp(44px,9vw,92px);line-height:1;color:#fff;text-shadow:0 0 18px rgba(51,225,255,.55);font-variant-numeric:tabular-nums}
+.unit.sec .num{color:var(--sun);text-shadow:0 0 18px rgba(255,209,102,.6)}
+.lbl{margin-top:6px;font-size:12px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+.when{font-size:14px;color:#ffe3f0;letter-spacing:.06em}
+.launched-title{font-family:Anton,Impact,sans-serif;font-size:clamp(48px,10vw,110px);color:var(--sun);text-shadow:0 0 30px var(--orange);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.04)}}
+.cta{margin-top:30px;display:inline-flex;gap:10px;align-items:center;font-weight:700;padding:15px 26px;border:0;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--orange));color:#fff;font-size:16px;box-shadow:0 10px 30px rgba(255,46,136,.45);text-decoration:none;transition:transform .15s}
+.cta:hover{transform:translateY(-2px)}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.chip{font-size:13px;padding:7px 13px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.18)}
+.chip b{color:var(--sun)}
+
+/* ===== MAIN ===== */
+main{position:relative;max-width:1100px;margin:-90px auto 0;padding:0 18px 80px;z-index:3}
+.banner{display:none;margin:0 0 16px;padding:12px 16px;border-radius:14px;background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.4);color:var(--sun);font-size:14px}
+.layout{display:grid;grid-template-columns:380px 1fr;gap:22px;align-items:start}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,rgba(43,18,74,.92),rgba(26,11,46,.95));border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.sticky{position:sticky;top:16px}
+@media(max-width:900px){.sticky{position:static}}
+h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:30px;letter-spacing:.02em;line-height:1.05}
+h2 .pink{color:var(--pink)} h2 .cyan{color:var(--cyan)} h2 .sun{color:var(--sun)}
+.who{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 16px;font-size:14px;color:var(--muted)}
+.who b{color:var(--ink)}
+.link{background:none;border:0;color:var(--cyan);text-decoration:underline;font-size:13px}
+textarea{width:100%;min-height:110px;resize:vertical;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:16px;line-height:1.4;outline:none;transition:border .15s}
+textarea:focus,input[type=text]:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,46,136,.2)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px;font-size:12px;color:var(--muted)}
+.label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.cats{display:flex;flex-wrap:wrap;gap:7px}
+.cat{border:1px solid var(--line);background:rgba(255,255,255,.04);padding:7px 11px;border-radius:999px;font-size:13px;transition:all .15s}
+.cat:hover{border-color:rgba(255,255,255,.35)}
+.cat.on{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 4px 16px rgba(255,46,136,.4)}
+input[type=range]{width:100%;accent-color:var(--pink)}
+.conf-read{display:flex;justify-content:space-between;font-size:14px;margin-top:4px}
+.conf-read b{color:var(--sun)}
+.btn{width:100%;margin-top:18px;padding:14px;border:0;border-radius:14px;font-weight:700;font-size:16px;background:linear-gradient(90deg,var(--pink),var(--orange));color:#fff;box-shadow:0 8px 24px rgba(255,46,136,.35);transition:transform .12s,opacity .12s}
+.btn:hover{transform:translateY(-1px)} .btn:disabled{opacity:.5;transform:none;cursor:default}
+.ghost{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);padding:9px 12px;border-radius:12px;font-size:13px}
+.ghost:hover{border-color:rgba(255,255,255,.35)}
+.locked{text-align:center;padding:18px 6px;color:var(--muted);font-size:15px}
+.locked .big{font-size:40px;margin-bottom:6px}
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:14px 0 16px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+select{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:13px}
+select option{background:var(--night2)}
+
+.feed{display:grid;gap:14px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;animation:in .35s ease both;overflow:hidden}
+.card.yes{border-color:rgba(61,255,176,.6);background:linear-gradient(180deg,rgba(61,255,176,.10),rgba(255,255,255,.04))}
+.card.no{border-color:rgba(255,79,109,.45);opacity:.86}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.card-top{display:flex;align-items:center;gap:10px}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;color:#1a0b2e;flex:none}
+.meta{flex:1;min-width:0}
+.meta .n{font-weight:700;font-size:15px}
+.meta .t{font-size:12px;color:var(--muted)}
+.tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:rgba(51,225,255,.12);color:var(--cyan);border:1px solid rgba(51,225,255,.3);white-space:nowrap}
+.text{font-size:18px;line-height:1.4;margin:12px 0 12px;word-wrap:break-word}
+.confbar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.confbar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--orange))}
+.conftxt{font-size:12px;color:var(--muted);margin-top:5px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:13px;transition:all .15s}
+.pill:hover{border-color:rgba(255,255,255,.4)}
+.pill.on.up{background:rgba(255,154,61,.2);border-color:var(--orange)}
+.pill.on.down{background:rgba(51,225,255,.15);border-color:var(--cyan)}
+.pill.on.yes{background:rgba(61,255,176,.2);border-color:var(--mint)}
+.pill.on.no{background:rgba(255,79,109,.2);border-color:var(--hot)}
+.del{margin-left:auto;background:none;border:0;color:var(--muted);font-size:12px;text-decoration:underline}
+.stamp{position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(-12deg);font-family:Anton,Impact,sans-serif;font-size:34px;letter-spacing:.06em;padding:2px 12px;border:3px solid;border-radius:8px;opacity:.22;pointer-events:none}
+.card.yes .stamp{color:var(--mint)} .card.no .stamp{color:var(--hot)}
+.verdict-q{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--sun);margin-right:4px}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+.empty .big{font-size:44px}
+
+.board{margin-top:22px}
+.rank{display:grid;gap:8px;margin-top:12px}
+.rk{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.rk .pos{font-family:Anton,Impact,sans-serif;font-size:22px;width:28px;text-align:center;color:var(--muted)}
+.rk:nth-child(1) .pos{color:var(--sun)} .rk:nth-child(2) .pos{color:#e3e3f0} .rk:nth-child(3) .pos{color:var(--orange)}
+.rk .nm{flex:1;font-weight:700}
+.rk .sc{font-size:13px;color:var(--muted)} .rk .sc b{color:var(--ink);font-size:16px}
+.small{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,3,16,.72);backdrop-filter:blur(8px)}
+.modal.show{display:flex}
+.modal .box{width:100%;max-width:420px;text-align:center;background:linear-gradient(180deg,#2b124a,#1a0b2e);border:1px solid var(--line);border-radius:24px;padding:30px 24px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:in .3s ease both}
+.modal .script{font-family:Yellowtail,cursive;font-size:44px;color:#fff;text-shadow:0 0 14px var(--pink)}
+.modal p{color:var(--muted);margin:8px 0 18px}
+input[type=text]{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:18px;text-align:center;outline:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:#fff;color:#1a0b2e;font-weight:700;padding:12px 18px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .3s;z-index:60;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 20px 40px;opacity:.7}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="stars"></div>
+  <div class="scene" aria-hidden="true">
+    <svg viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffe066"/><stop offset=".55" stop-color="#ff9a3d"/><stop offset="1" stop-color="#ff2e88"/>
+        </linearGradient>
+        <mask id="stripes">
+          <rect width="1440" height="500" fill="#fff"/>
+          <rect x="0" y="250" width="1440" height="6" fill="#000"/>
+          <rect x="0" y="272" width="1440" height="9" fill="#000"/>
+          <rect x="0" y="296" width="1440" height="12" fill="#000"/>
+          <rect x="0" y="322" width="1440" height="15" fill="#000"/>
+          <rect x="0" y="350" width="1440" height="18" fill="#000"/>
+        </mask>
+      </defs>
+      <circle cx="720" cy="330" r="190" fill="url(#sunG)" mask="url(#stripes)" opacity=".95"/>
+      <!-- skyline -->
+      <g fill="#2a0c3d" opacity=".9">
+        <rect x="430" y="300" width="40" height="120"/><rect x="475" y="270" width="30" height="150"/><rect x="510" y="315" width="46" height="105"/>
+        <rect x="880" y="285" width="34" height="135"/><rect x="918" y="250" width="44" height="170"/><rect x="966" y="305" width="36" height="115"/><rect x="1006" y="330" width="50" height="90"/>
+      </g>
+      <rect x="0" y="410" width="1440" height="90" fill="#1d0a33"/>
+      <!-- palms (original silhouettes) -->
+      <g fill="#14061f">
+        <path d="M150 500 C160 420 175 330 205 240 L214 242 C188 330 176 420 172 500Z"/>
+        <path d="M208 240 C160 205 105 205 60 230 C110 215 160 222 204 248Z"/>
+        <path d="M208 240 C185 190 140 165 95 165 C140 180 175 205 202 246Z"/>
+        <path d="M208 240 C230 190 270 172 320 175 C275 190 245 210 214 248Z"/>
+        <path d="M208 240 C255 220 310 230 345 265 C300 245 255 240 214 250Z"/>
+        <path d="M208 240 C200 200 210 160 235 130 C222 170 218 205 214 246Z"/>
+        <path d="M1270 500 C1262 430 1250 360 1225 290 L1233 287 C1258 360 1272 430 1290 500Z"/>
+        <path d="M1229 289 C1270 255 1320 252 1365 272 C1320 262 1275 268 1234 296Z"/>
+        <path d="M1229 289 C1250 245 1290 225 1335 225 C1295 240 1262 260 1236 294Z"/>
+        <path d="M1229 289 C1205 248 1165 230 1120 232 C1162 245 1195 265 1224 296Z"/>
+        <path d="M1229 289 C1185 270 1135 278 1100 308 C1140 290 1185 288 1224 298Z"/>
+        <path d="M1340 500 C1335 455 1328 410 1312 365 L1318 363 C1334 410 1344 455 1356 500Z"/>
+        <path d="M1315 365 C1345 342 1380 342 1410 356 C1378 350 1348 355 1318 372Z"/>
+        <path d="M1315 365 C1292 340 1260 333 1228 340 C1262 344 1290 356 1312 372Z"/>
+      </g>
+    </svg>
+    <div class="grid-floor"></div>
+  </div>
+
+  <div class="hero-inner">
+    <span class="kicker">🌴 Bolão da galera · Leonida</span>
+    <h1 class="wordmark"><span class="script">Esquenta</span><span class="block">GTA VI</span></h1>
+    <p class="sub" id="heroSub">Crava teu palpite do que vai rolar no jogo antes da meia-noite. Depois do lançamento a gente volta aqui e vê quem é profeta e quem é palhaço.</p>
+
+    <div id="cdWrap">
+      <div class="countdown" id="countdown">
+        <div class="unit"><div class="num" id="d">--</div><div class="lbl">dias</div></div>
+        <div class="unit"><div class="num" id="h">--</div><div class="lbl">horas</div></div>
+        <div class="unit"><div class="num" id="m">--</div><div class="lbl">min</div></div>
+        <div class="unit sec"><div class="num" id="s">--</div><div class="lbl">seg</div></div>
+      </div>
+      <div class="when">Quinta, 19 de novembro · 00:00 (horário de Brasília)</div>
+    </div>
+
+    <div class="chips" id="stats"></div>
+    <a class="cta" href="#app" id="heroCta">Mandar meu palpite ↓</a>
+  </div>
+</section>
+
+<main id="app">
+  <div class="banner" id="banner">⚠️ Modo demonstração: o banco de dados ainda não está ligado, então os palpites ficam só neste navegador. Depois do deploy no Netlify (com as funções) isso some.</div>
+  <div class="layout">
+    <aside>
+      <div class="panel sticky" id="formPanel">
+        <h2>Crava teu <span class="pink">palpite</span></h2>
+        <div class="who"><span>Jogando como <b id="meName">—</b></span><button class="link" id="changeName">trocar nome</button></div>
+        <div id="formBody">
+          <textarea id="txt" maxlength="280" placeholder=""></textarea>
+          <div class="row"><button class="link" id="inspire">🎲 me dá uma ideia</button><span id="count">0/280</span></div>
+          <div class="label">Categoria</div>
+          <div class="cats" id="catPick"></div>
+          <div class="label">Quanta certeza?</div>
+          <input type="range" id="conf" min="0" max="100" step="5" value="60">
+          <div class="conf-read"><span id="confLbl">boto fé</span><b id="confVal">60%</b></div>
+          <button class="btn" id="send">Cravar palpite 🔥</button>
+          <p class="small">Os palpites trancam à meia-noite do lançamento. Depois disso ninguém apaga nada, então pensa bem 😏</p>
+        </div>
+      </div>
+
+      <div class="panel board">
+        <h2 id="boardTitle">Ranking <span class="sun">dos profetas</span></h2>
+        <div class="rank" id="rank"></div>
+        <p class="small" id="boardHelp"></p>
+      </div>
+    </aside>
+
+    <section>
+      <div class="panel">
+        <h2 id="feedTitle">O que a <span class="cyan">galera</span> acha</h2>
+        <div class="toolbar">
+          <div class="filters" id="filters"></div>
+          <select id="sort">
+            <option value="new">Mais recentes</option>
+            <option value="hot">Mais concordados</option>
+            <option value="spicy">Mais polêmicos</option>
+            <option value="conf">Mais confiantes</option>
+          </select>
+        </div>
+        <div class="feed" id="feed"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>Feito pela galera, pra galera. Projeto de fã, sem ligação com a Rockstar Games.</footer>
+
+<div class="modal" id="nameModal">
+  <div class="box">
+    <div class="script">Bem-vindo a Leonida</div>
+    <p>Como a galera te chama? Teu nome vai aparecer nos teus palpites.</p>
+    <input type="text" id="nameIn" maxlength="24" placeholder="Teu nome ou apelido" autocomplete="nickname">
+    <button class="btn" id="nameOk">Entrar 🌴</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== CONFIG ======
+const LAUNCH = Date.parse("2026-11-19T00:00:00-03:00");
+const CATS = [
+  {id:"historia",   label:"📖 História"},
+  {id:"personagens",label:"🎭 Personagens"},
+  {id:"mapa",       label:"🗺️ Mapa"},
+  {id:"gameplay",   label:"🎮 Gameplay"},
+  {id:"online",     label:"🌐 Online"},
+  {id:"zoeira",     label:"🤡 Zoeira"}
+];
+const IDEAS = [
+  "O Jason morre no final da história",
+  "A Lucia trai o Jason em algum momento",
+  "Vai ter um personagem de GTA antigo fazendo ponta",
+  "Dá pra entrar em mais de 50% dos prédios",
+  "O mapa vai ter pelo menos 3 cidades",
+  "Vai ter jacaré atacando em missão",
+  "O final vai ter escolha entre os dois protagonistas",
+  "O GTA Online novo lança junto",
+  "Vai ter cassino jogável",
+  "Algum de nós vai virar a noite jogando e faltar no trabalho",
+  "Os servidores da PSN vão cair na primeira hora",
+  "Vai ter sistema de reputação nas redes sociais dentro do jogo",
+  "Vai dar pra ter mais de uma casa e decorar",
+  "A primeira missão é um assalto a loja de conveniência"
+];
+const POLL_MS = 15000;
+
+// ====== STATE ======
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return localStorage.getItem(k) }catch{ return null } },
+  set(k,v){ try{ localStorage.setItem(k,v) }catch{} }
+};
+let uid = store.get("egta_uid");
+if(!uid){ uid = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())+Math.random().toString(16).slice(2)).replace(/[^a-z0-9-]/gi,""); store.set("egta_uid", uid); }
+let name = store.get("egta_name") || "";
+let mode = null; // null = descobrindo, "live" = Netlify, "mock" = local
+let data = {predictions:[]};
+let pickedCat = "historia";
+let filter = "all";
+const FORCE_LAUNCH = new URLSearchParams(location.search).has("lancou");
+let serverOffset = 0;
+const now = () => Date.now() + serverOffset;
+const isLaunched = () => (mode==="mock" && FORCE_LAUNCH) || now() >= LAUNCH;
+
+// ====== MOCK (modo demonstração, sem banco) ======
+function mockApi(method, body){
+  const K="egta_mock"; let db;
+  try{ db = JSON.parse(store.get(K)) || {p:{},v:{},j:{}} }catch{ db={p:{},v:{},j:{}} }
+  const save=()=>store.set(K, JSON.stringify(db));
+  const err=(m)=>{ const e=new Error(m); e.user=true; throw e; };
+  if(method==="GET"){
+    const map={};
+    for(const x of Object.values(db.p)) map[x.id]={...x,up:0,down:0,yes:0,no:0,myVote:null,myJudge:null};
+    for(const [k,val] of Object.entries(db.v)){ const [pid,u]=k.split("|"); if(map[pid]){ map[pid][val]++; if(u===uid) map[pid].myVote=val; } }
+    for(const [k,val] of Object.entries(db.j)){ const [pid,u]=k.split("|"); if(map[pid]){ map[pid][val]++; if(u===uid) map[pid].myJudge=val; } }
+    return {now:Date.now(), predictions:Object.values(map).map(({uid:o,...r})=>({...r,mine:o===uid})).sort((a,b)=>b.ts-a.ts)};
+  }
+  const L = isLaunched();
+  if(body.action==="create"){
+    if(L) err("Os palpites foram trancados à meia-noite. Agora é hora da verdade!");
+    const id=(crypto.randomUUID?crypto.randomUUID():String(Date.now()));
+    db.p[id]={id,uid,name:body.name,text:body.text,cat:body.cat,conf:body.conf,ts:Date.now()}; save(); return {ok:true,id};
+  }
+  if(body.action==="vote"||body.action==="judge"){
+    if(body.action==="judge" && !L) err("Só dá pra julgar depois do lançamento");
+    const t = body.action==="vote"? db.v : db.j; const k=body.pid+"|"+uid;
+    if(body.val==="none") delete t[k]; else t[k]=body.val; save(); return {ok:true};
+  }
+  if(body.action==="delete"){
+    if(L) err("Depois do lançamento não dá mais pra apagar 😏");
+    delete db.p[body.pid];
+    for(const t of [db.v,db.j]) for(const k of Object.keys(t)) if(k.startsWith(body.pid+"|")) delete t[k];
+    save(); return {ok:true};
+  }
+}
+
+// ====== API ======
+async function api(method, body){
+  if(mode==="mock") return mockApi(method, body);
+  try{
+    const r = await fetch(method==="GET" ? "/api?uid="+encodeURIComponent(uid) : "/api", {
+      method, headers:{"content-type":"application/json"}, body: body ? JSON.stringify(body) : undefined, cache:"no-store"
+    });
+    const ct = r.headers.get("content-type")||"";
+    if(!ct.includes("json")) throw new Error("sem api");
+    const d = await r.json();
+    if(!r.ok){ const e=new Error(d.error||"Deu ruim"); e.user=true; throw e; }
+    if(mode===null) mode="live";
+    return d;
+  }catch(e){
+    if(e.user) throw e;
+    if(mode===null){ mode="mock"; $("#banner").style.display="block"; return mockApi(method, body); }
+    throw new Error("Sem conexão. Tenta de novo.");
+  }
+}
+
+async function refresh(){
+  try{
+    const d = await api("GET");
+    if(d.now) serverOffset = d.now - Date.now();
+    data = d; render();
+  }catch(e){ /* silencioso no polling */ }
+}
+
+// ====== HELPERS ======
+const esc = s => String(s??"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+const catLabel = id => (CATS.find(c=>c.id===id)||CATS[5]).label;
+function hue(str){ let h=0; for(const ch of str.toLowerCase()) h=(h*31+ch.charCodeAt(0))%360; return h; }
+function confWord(v){ return v<=20?"chute no escuro":v<=45?"sei lá, pode ser":v<=75?"boto fé":v<95?"muita certeza":"aposto meu PS5"; }
+function ago(ts){
+  const s=Math.max(1,Math.floor((Date.now()-ts)/1000));
+  if(s<60) return "agora"; if(s<3600) return Math.floor(s/60)+" min atrás";
+  if(s<86400) return Math.floor(s/3600)+"h atrás"; return new Date(ts).toLocaleDateString("pt-BR");
+}
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2600); }
+function verdictOf(p){ const tot=p.yes+p.no; if(!tot) return null; if(p.yes>p.no) return "yes"; if(p.no>p.yes) return "no"; return "tie"; }
+
+// ====== COUNTDOWN ======
+let wasLaunched = null;
+function tick(){
+  const L = isLaunched();
+  if(L){
+    if(wasLaunched===false) { confetti(); refresh(); }
+    $("#cdWrap").innerHTML = `<div class="launched-title">LANÇOU! 🎉</div><div class="when">Bem-vindo a Leonida. Agora é hora da verdade.</div>`;
+    $("#heroSub").textContent = "Os palpites estão trancados. Joga, volta aqui e marca o que rolou e o que não rolou em cada palpite.";
+    $("#heroCta").textContent = "Conferir os palpites ↓";
+  } else {
+    const diff = Math.max(0, LAUNCH - now());
+    const d=Math.floor(diff/864e5), h=Math.floor(diff%864e5/36e5), m=Math.floor(diff%36e5/6e4), s=Math.floor(diff%6e4/1e3);
+    $("#d").textContent=pad(d); $("#h").textContent=pad(h); $("#m").textContent=pad(m); $("#s").textContent=pad(s);
+    document.title = `${d? d+"d ":""}${pad(h)}:${pad(m)}:${pad(s)} · Esquenta GTA VI`;
+  }
+  if(wasLaunched!==null && wasLaunched!==L) render();
+  wasLaunched = L;
+}
+
+// ====== RENDER ======
+function render(){
+  const L = isLaunched();
+  const P = data.predictions || [];
+  const people = new Set(P.map(p=>p.name.toLowerCase()));
+  const judged = P.filter(p=>verdictOf(p)==="yes").length;
+  $("#stats").innerHTML =
+    `<span class="chip"><b>${P.length}</b> palpites</span><span class="chip"><b>${people.size}</b> profetas</span>` +
+    (L ? `<span class="chip">✅ <b>${judged}</b> confirmados</span>` : `<span class="chip">🔒 trancam à meia-noite</span>`);
+
+  // form
+  $("#meName").textContent = name || "—";
+  if(L){
+    $("#formBody").innerHTML = `<div class="locked"><div class="big">🔒</div>Palpites trancados.<br>Agora marca nos cards o que <b>rolou</b> e o que <b>não rolou</b>.</div>`;
+  }
+
+  // filters
+  const counts = {}; P.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
+  $("#filters").innerHTML = [`<button class="cat ${filter==="all"?"on":""}" data-f="all">Todos</button>`]
+    .concat(CATS.filter(c=>counts[c.id]).map(c=>`<button class="cat ${filter===c.id?"on":""}" data-f="${c.id}">${c.label} ${counts[c.id]}</button>`)).join("");
+
+  // feed
+  let list = P.filter(p=>filter==="all"||p.cat===filter);
+  const sort=$("#sort").value;
+  if(sort==="hot") list.sort((a,b)=>(b.up-b.down)-(a.up-a.down)||b.ts-a.ts);
+  if(sort==="spicy") list.sort((a,b)=>Math.min(b.up,b.down)*2+(b.up+b.down) - (Math.min(a.up,a.down)*2+(a.up+a.down)));
+  if(sort==="conf") list.sort((a,b)=>b.conf-a.conf);
+  $("#feedTitle").innerHTML = L ? `Hora da <span class="sun">verdade</span>` : `O que a <span class="cyan">galera</span> acha`;
+
+  if(!list.length){
+    $("#feed").innerHTML = `<div class="empty"><div class="big">🌴</div>${P.length? "Nada nessa categoria ainda." : "Ninguém palpitou ainda. Seja o primeiro profeta."}</div>`;
+  } else {
+    $("#feed").innerHTML = list.map(p=>{
+      const v = L ? verdictOf(p) : null;
+      const cls = v==="yes"?"yes":v==="no"?"no":"";
+      const h = hue(p.name);
+      return `<article class="card ${cls}">
+        ${v==="yes"?'<div class="stamp">ROLOU</div>':v==="no"?'<div class="stamp">FUROU</div>':""}
+        <div class="card-top">
+          <div class="av" style="background:hsl(${h} 90% 70%)">${esc(p.name.trim()[0]||"?").toUpperCase()}</div>
+          <div class="meta"><div class="n">${esc(p.name)}${p.mine?' <span style="color:var(--muted);font-weight:400">(você)</span>':""}</div><div class="t">${ago(p.ts)}</div></div>
+          <span class="tag">${catLabel(p.cat)}</span>
+        </div>
+        <div class="text">${esc(p.text)}</div>
+        <div class="confbar"><i style="width:${p.conf}%"></i></div>
+        <div class="conftxt">Certeza: ${p.conf}% · ${confWord(p.conf)}</div>
+        <div class="actions">
+          ${L ? `
+            <span class="verdict-q">Rolou?</span>
+            <button class="pill yes ${p.myJudge==="yes"?"on":""}" data-act="judge" data-val="yes" data-id="${p.id}">✅ Rolou <b>${p.yes}</b></button>
+            <button class="pill no ${p.myJudge==="no"?"on":""}" data-act="judge" data-val="no" data-id="${p.id}">❌ Não rolou <b>${p.no}</b></button>
+            <span class="pill" style="cursor:default;opacity:.7" title="Votos de antes do lançamento">🔥${p.up} · 🧢${p.down}</span>
+          ` : `
+            <button class="pill up ${p.myVote==="up"?"on":""}" data-act="vote" data-val="up" data-id="${p.id}">🔥 Concordo <b>${p.up}</b></button>
+            <button class="pill down ${p.myVote==="down"?"on":""}" data-act="vote" data-val="down" data-id="${p.id}">🧢 Duvido <b>${p.down}</b></button>
+            ${p.mine?`<button class="del" data-act="delete" data-id="${p.id}">apagar</button>`:""}
+          `}
+        </div>
+      </article>`;
+    }).join("");
+  }
+
+  // ranking
+  const by = {};
+  P.forEach(p=>{
+    const k=p.name.trim().toLowerCase();
+    by[k] = by[k] || {name:p.name, total:0, hits:0, miss:0, pts:0, hype:0};
+    const r=by[k]; r.total++; r.hype += p.up;
+    const v=verdictOf(p);
+    // Pontos: acerto vale mais quando o palpite era ousado (menos gente concordava)
+    if(v==="yes"){ r.hits++; r.pts += 10 + Math.round((100-p.conf)/10) + p.down*2; }
+    if(v==="no"){ r.miss++; r.pts -= Math.round(p.conf/20); }
+  });
+  let rows = Object.values(by);
+  if(L){
+    $("#boardTitle").innerHTML = `Ranking <span class="sun">dos profetas</span>`;
+    rows.sort((a,b)=>b.pts-a.pts||b.hits-a.hits);
+    $("#rank").innerHTML = rows.length ? rows.map((r,i)=>`<div class="rk"><span class="pos">${i+1}</span><span class="nm">${esc(r.name)}</span><span class="sc"><b>${r.pts}</b> pts · ✅${r.hits} ❌${r.miss}</span></div>`).join("") : `<div class="small">Ninguém no ranking ainda.</div>`;
+    $("#boardHelp").textContent = "Acerto vale 10 pts + bônus se o palpite era ousado (pouca certeza ou muita gente duvidando). Errar com muita certeza tira ponto. O que vale é a maioria dos votos ✅/❌ de cada palpite.";
+  } else {
+    $("#boardTitle").innerHTML = `Quem tá <span class="pink">mais hypado</span>`;
+    rows.sort((a,b)=>b.total-a.total||b.hype-a.hype);
+    $("#rank").innerHTML = rows.length ? rows.map((r,i)=>`<div class="rk"><span class="pos">${i+1}</span><span class="nm">${esc(r.name)}</span><span class="sc"><b>${r.total}</b> palpites · 🔥${r.hype}</span></div>`).join("") : `<div class="small">Ninguém palpitou ainda.</div>`;
+    $("#boardHelp").textContent = "Depois da meia-noite isso vira o Ranking dos Profetas: a galera marca o que rolou no jogo e quem acertou mais leva a coroa 👑";
+  }
+}
+
+// ====== FORM ======
+function buildCats(){
+  $("#catPick").innerHTML = CATS.map(c=>`<button class="cat ${c.id===pickedCat?"on":""}" data-c="${c.id}">${c.label}</button>`).join("");
+}
+let ideaI = Math.floor(Math.random()*IDEAS.length);
+function setPlaceholder(){ const t=$("#txt"); if(t) t.placeholder = "Ex.: " + IDEAS[ideaI % IDEAS.length]; }
+
+document.addEventListener("click", async e=>{
+  const c = e.target.closest("[data-c]"); if(c){ pickedCat=c.dataset.c; buildCats(); return; }
+  const f = e.target.closest("[data-f]"); if(f){ filter=f.dataset.f; render(); return; }
+  const a = e.target.closest("[data-act]");
+  if(a){
+    const id=a.dataset.id, act=a.dataset.act;
+    if(act==="delete"){ if(!confirm("Apagar esse palpite?")) return; }
+    const p = (data.predictions||[]).find(x=>x.id===id);
+    let val = a.dataset.val;
+    if(act==="vote" && p && p.myVote===val) val="none";
+    if(act==="judge" && p && p.myJudge===val) val="none";
+    a.disabled = true;
+    try{ await api("POST",{action:act,uid,pid:id,val}); await refresh(); }
+    catch(err){ toast(err.message); a.disabled=false; }
+  }
+});
+
+function wireForm(){
+  const txt=$("#txt"); if(!txt) return;
+  txt.addEventListener("input",()=>{$("#count").textContent=txt.value.length+"/280"});
+  $("#inspire").addEventListener("click",()=>{ ideaI++; txt.value=IDEAS[ideaI%IDEAS.length]; txt.dispatchEvent(new Event("input")); txt.focus(); });
+  $("#conf").addEventListener("input",e=>{ const v=+e.target.value; $("#confVal").textContent=v+"%"; $("#confLbl").textContent=confWord(v); });
+  $("#send").addEventListener("click", async ()=>{
+    if(!name) return openName();
+    const text=txt.value.trim();
+    if(text.length<4) { toast("Escreve teu palpite aí 👀"); txt.focus(); return; }
+    const btn=$("#send"); btn.disabled=true; btn.textContent="Cravando...";
+    try{
+      await api("POST",{action:"create",uid,name,text,cat:pickedCat,conf:+$("#conf").value});
+      txt.value=""; $("#count").textContent="0/280"; ideaI++; setPlaceholder();
+      toast("Palpite cravado! 🔥"); await refresh();
+    }catch(err){ toast(err.message); }
+    btn.disabled=false; btn.textContent="Cravar palpite 🔥";
+  });
+}
+
+// ====== NOME ======
+function openName(){ $("#nameModal").classList.add("show"); const i=$("#nameIn"); i.value=name; setTimeout(()=>i.focus(),50); }
+function saveName(){
+  const v=$("#nameIn").value.replace(/\s+/g," ").trim().slice(0,24);
+  if(v.length<2){ toast("Pelo menos 2 letras 😅"); return; }
+  name=v; store.set("egta_name",v); $("#nameModal").classList.remove("show"); render();
+  toast(`Fala, ${v}! 🌴`);
+}
+$("#nameOk").addEventListener("click", saveName);
+$("#nameIn").addEventListener("keydown", e=>{ if(e.key==="Enter") saveName(); });
+$("#changeName").addEventListener("click", openName);
+$("#sort").addEventListener("change", render);
+
+// ====== CONFETE ======
+function confetti(){
+  const cv=document.createElement("canvas"); Object.assign(cv.style,{position:"fixed",inset:0,pointerEvents:"none",zIndex:70});
+  document.body.appendChild(cv); const ctx=cv.getContext("2d"); cv.width=innerWidth; cv.height=innerHeight;
+  const cols=["#ff2e88","#ff9a3d","#ffd166","#33e1ff","#3dffb0"];
+  const ps=Array.from({length:180},()=>({x:Math.random()*cv.width,y:-20-Math.random()*cv.height,vy:2+Math.random()*4,vx:-1.5+Math.random()*3,r:Math.random()*6.28,s:5+Math.random()*7,c:cols[Math.random()*5|0]}));
+  let f=0;(function loop(){ ctx.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.r+=.1;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);ctx.restore();});
+    if(++f<320) requestAnimationFrame(loop); else cv.remove(); })();
+}
+
+// ====== START ======
+buildCats(); setPlaceholder(); wireForm();
+tick(); setInterval(tick, 1000);
+refresh().then(()=>{ render(); if(!name) openName(); });
+setInterval(()=>{ if(!document.hidden) refresh(); }, POLL_MS);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) refresh(); });
+</script>
+</body>
+</html>
